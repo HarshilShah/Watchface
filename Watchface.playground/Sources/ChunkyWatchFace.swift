@@ -4,7 +4,7 @@ public class ChunkyWatchFace: UIViewController, WatchFace {
     
     // MARK:- Constants
     
-    private let fontSize: CGFloat = 220
+    private let fontSize: CGFloat = 230
     private let color = UIColor(red: 0.47, green: 0.76, blue: 0.98, alpha: 1)
     
     // MARK:- Views
@@ -22,6 +22,7 @@ public class ChunkyWatchFace: UIViewController, WatchFace {
         let fontURL = Bundle.main.url(forResource: "SF-Compact-Display-Light", withExtension: "otf")
         CTFontManagerRegisterFontsForURL(fontURL! as CFURL, CTFontManagerScope.process, nil)
         let font = UIFont(name: "SFCompactDisplay-Light", size: fontSize)!
+//        let font = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         
         hourLabel.font = font
         colonLabel.font = font.withSize(fontSize - 70)

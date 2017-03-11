@@ -4,7 +4,7 @@ import UIKit
 import PlaygroundSupport
 
 let chunky = ChunkyWatchFace()
-chunky.view.frame = CGRect(x: 0, y: 0, width: 300, height: 375)
+chunky.view.frame = CGRect(x: 0, y: 0, width: 312, height: 390)
 
 PlaygroundPage.current.liveView = chunky.view
 
