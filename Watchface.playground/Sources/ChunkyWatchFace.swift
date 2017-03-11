@@ -21,15 +21,7 @@ public class ChunkyWatchFace: UIViewController, WatchFace {
     override public func viewDidLoad() {
         let fontURL = Bundle.main.url(forResource: "SF-Compact-Display-Light", withExtension: "otf")
         CTFontManagerRegisterFontsForURL(fontURL! as CFURL, CTFontManagerScope.process, nil)
-        
-        let tempFont = UIFont(name: "SFCompactDisplay-Light", size: fontSize)!
-        
-        let attribute = [
-            UIFontFeatureTypeIdentifierKey: kStylisticAlternativesType,
-            UIFontFeatureSelectorIdentifierKey: kStylisticAltThreeOnSelector ]
-        
-        let descriptor = tempFont.fontDescriptor.addingAttributes(attribute)
-        let font = UIFont(descriptor: descriptor, size: fontSize)
+        let font = UIFont(name: "SFCompactDisplay-Light", size: fontSize)!
         
         hourLabel.font = font
         colonLabel.font = font.withSize(fontSize - 70)
