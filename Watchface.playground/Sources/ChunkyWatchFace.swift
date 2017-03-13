@@ -64,7 +64,7 @@ public class ChunkyWatchFace: UIViewController, WatchFace {
     
     public func set(date: Date) {
         let calendar = Calendar.autoupdatingCurrent
-        hourLabel.set(text: "\(calendar.component(.hour, from: date))", withLineHeight: fontSize + 20)
+        hourLabel.set(text: "\((calendar.component(.hour, from: date) - 1) % 12 + 1)", withLineHeight: fontSize + 20)
         minuteLabel.set(text: String(format: "%02d", calendar.component(.minute, from: date)), withLineHeight: fontSize + 20)
     }
     
