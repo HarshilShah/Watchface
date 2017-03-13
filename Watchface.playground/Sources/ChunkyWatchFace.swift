@@ -1,6 +1,6 @@
 import UIKit
 
-public class ChunkyWatchFace: UIViewController, WatchFace {
+public class ChunkyWatchFace: UIViewController {
     
     // MARK:- Constants
     
