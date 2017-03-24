@@ -19,9 +19,9 @@ public class ChunkyWatchFace: UIViewController {
     // MARK:- View controller lifecycle methods
     
     override public func viewDidLoad() {
-        let fontURL = Bundle.main.url(forResource: "SF-Compact-Display-Light", withExtension: "otf")
+        let fontURL = Bundle.main.url(forResource: "SF-Compact-Display-Regular", withExtension: "otf")
         CTFontManagerRegisterFontsForURL(fontURL! as CFURL, CTFontManagerScope.process, nil)
-        let font = UIFont(name: "SFCompactDisplay-Light", size: fontSize)!
+        let font = UIFont(name: "SFCompactDisplay-Regular", size: fontSize)!
 //        let font = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         
         hourLabel.font = font
@@ -62,10 +62,19 @@ public class ChunkyWatchFace: UIViewController {
         }, completion: nil)
     }
     
-    public func set(date: Date) {
+    public func set(date: Date = Date()) {
         let calendar = Calendar.autoupdatingCurrent
         hourLabel.set(text: "\((calendar.component(.hour, from: date) - 1) % 12 + 1)", withLineHeight: fontSize + 20)
         minuteLabel.set(text: String(format: "%02d", calendar.component(.minute, from: date)), withLineHeight: fontSize + 20)
+        
+        let seconds = 60 - calendar.component(.second, from: date)
+        print(seconds)
+        
+        delay(Double(seconds), closure: { [weak self] in
+            DispatchQueue.main.async {
+                self?.set()
+            }
+        })
     }
     
 }
