@@ -25,7 +25,7 @@ public class ChunkyWatchFace: UIViewController {
 //        let font = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         
         hourLabel.font = font
-        colonLabel.font = font.withSize(fontSize - 70)
+        colonLabel.font = font
         minuteLabel.font = font
         
         hourLabel.textColor = color
@@ -45,12 +45,15 @@ public class ChunkyWatchFace: UIViewController {
         stackView.addArrangedSubview(hourLabel)
         stackView.addArrangedSubview(secondaryStackView)
         
-        secondaryStackView.alignment = .top
         secondaryStackView.addArrangedSubview(colonLabel)
         secondaryStackView.addArrangedSubview(minuteLabel)
         
+        let attributedColon = NSMutableAttributedString(string: ":")
+        attributedColon.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(value: -Double(fontSize)/3.33), range: NSMakeRange(0, attributedColon.length))
+        
         hourLabel.set(text: "10", withLineHeight: fontSize + 20)
-        colonLabel.set(text: ":", withLineHeight: fontSize - 50)
+        colonLabel.set(text: ":", withLineHeight: fontSize + 20)
+        colonLabel.set(attributedText: attributedColon, withLineHeight: fontSize + 20)
         minuteLabel.set(text: "09", withLineHeight: fontSize + 20)
     }
     
@@ -81,10 +84,15 @@ public class ChunkyWatchFace: UIViewController {
 
 private extension UILabel {
     func set(text: String, withLineHeight lineHeight: CGFloat) {
+        let attributedString = NSMutableAttributedString(string: text)
+        set(attributedText: attributedString, withLineHeight: lineHeight)
+    }
+    
+    func set(attributedText: NSMutableAttributedString, withLineHeight lineHeight: CGFloat) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineHeight
-        let attributedString = NSMutableAttributedString(string: text)
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, text.characters.count))
+        let attributedString = attributedText
+        attributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attributedText.length))
         self.attributedText = attributedString
     }
 }
