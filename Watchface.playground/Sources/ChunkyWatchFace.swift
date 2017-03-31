@@ -19,10 +19,7 @@ public class ChunkyWatchFace: UIViewController {
     // MARK:- View controller lifecycle methods
     
     override public func viewDidLoad() {
-        let fontURL = Bundle.main.url(forResource: "SF-Compact-Display-Regular", withExtension: "otf")
-        CTFontManagerRegisterFontsForURL(fontURL! as CFURL, CTFontManagerScope.process, nil)
-        let font = UIFont(name: "SFCompactDisplay-Regular", size: fontSize)!
-//        let font = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
+        let font = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         
         hourLabel.font = font
         colonLabel.font = font
