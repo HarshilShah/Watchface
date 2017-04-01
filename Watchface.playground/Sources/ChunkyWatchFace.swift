@@ -54,12 +54,14 @@ public class ChunkyWatchFace: UIViewController {
         minuteLabel.set(text: "09", withLineHeight: fontSize + 20)
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         UIView.animate(withDuration: 0.5, delay: 0, options: [. repeat, .autoreverse, .curveEaseInOut], animations: { [weak self] in
             self?.colonLabel.alpha = 0.5
         }, completion: nil)
+        
+        set()
     }
     
     public func set(date: Date = Date()) {
