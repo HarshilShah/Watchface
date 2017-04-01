@@ -136,9 +136,9 @@ public class AnalogWatchFace: UIViewController {
         let minutesProgress = (Degrees(minutes) * 360 / 60) + secondsProgress/60
         let hourProgress = (Degrees(hours) * 360 / 12) + minutesProgress/12
         
-        rotate(layer: secondHandLayer, fromValue: secondsProgress.inRadians, withDuration: 60)
-        rotate(layer: minuteHandLayer, fromValue: minutesProgress.inRadians, withDuration: 60 * 60)
-        rotate(layer: hourHandLayer, fromValue: hourProgress.inRadians, withDuration: 60 * 60 * 12)
+        rotate(layer: secondHandLayer, from: secondsProgress.inRadians, withDuration: 60)
+        rotate(layer: minuteHandLayer, from: minutesProgress.inRadians, withDuration: 60 * 60)
+        rotate(layer: hourHandLayer, from: hourProgress.inRadians, withDuration: 60 * 60 * 12)
         
         delay(Double(60 - seconds), closure: { [weak self] in
             DispatchQueue.main.async {
@@ -147,7 +147,17 @@ public class AnalogWatchFace: UIViewController {
         })
     }
     
-    private func rotate(layer: CALayer, fromValue: CGFloat, withDuration duration: TimeInterval) {
+    private func rotate(layer: CALayer, from initialRotation: CGFloat?, withDuration duration: TimeInterval) {
+        
+        let fromValue: CGFloat = {
+            if let rotation = initialRotation {
+                return rotation
+            } else {
+                let transform = layer.transform
+                return atan2(transform.m12, transform.m11)
+            }
+        }()
+        
         let rotationAnimation = CABasicAnimation(keyPath:"transform.rotation.z")
         rotationAnimation.duration = duration
         rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
