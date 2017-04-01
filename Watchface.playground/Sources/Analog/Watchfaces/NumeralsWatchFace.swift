@@ -1,29 +1,18 @@
 import UIKit
 
-public class AnalogWatchFace: UIViewController {
+public class NumeralsWatchFace: UIViewController {
     
-    private static let dateFormatter = DateFormatter()
-    
-    private lazy var bezelLayer: BezelDrawingLayer = {
-        let bezelLayer = BezelDrawingLayer()
-        bezelLayer.numberOfPoints = 240
-        bezelLayer.ringWidth = 12
-        bezelLayer.widthRatio = 0.5
-        bezelLayer.lineWidth = 1
-        bezelLayer.color = .lightGray
-        return bezelLayer
-    }()
-    
-    private lazy var numeralsLayer: NumeralsDrawingLayer = {
-        let numeralsLayer = NumeralsDrawingLayer()
-        numeralsLayer.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightLight)
+    private lazy var numeralsLayer: LargeNumeralsDrawingLayer = {
+        let numeralsLayer = LargeNumeralsDrawingLayer()
+        numeralsLayer.font = UIFont.systemFont(ofSize: 160, weight: UIFontWeightSemibold)
+        numeralsLayer.color = UIColor.orange
         return numeralsLayer
     }()
     
     private lazy var hourHandLayer: WatchHandDrawingLayer = {
         let hourLayer = WatchHandDrawingLayer()
         hourLayer.type = .hour
-        hourLayer.fillColor = UIColor.black.cgColor
+        hourLayer.fillColor = UIColor.white.cgColor
         hourLayer.lineWidth = 2
         return hourLayer
     }()
@@ -31,7 +20,7 @@ public class AnalogWatchFace: UIViewController {
     private lazy var minuteHandLayer: WatchHandDrawingLayer = {
         let minuteLayer = WatchHandDrawingLayer()
         minuteLayer.type = .minute
-        minuteLayer.fillColor = UIColor.black.cgColor
+        minuteLayer.fillColor = UIColor.white.cgColor
         minuteLayer.lineWidth = 2
         return minuteLayer
     }()
@@ -45,24 +34,8 @@ public class AnalogWatchFace: UIViewController {
         return secondLayer
     }()
     
-    private lazy var dateLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .center
-        label.textColor = .white
-        label.font = UIFont.smallCapsSystemFont(ofSize: 24)
-        return label
-    }()
-    
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(dateLabel)
-        dateLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        dateLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        dateLabel.leftAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        
-        view.layer.addSublayer(bezelLayer)
         view.layer.addSublayer(numeralsLayer)
         
         /// The hour hand is small so needs to be before i.e.
@@ -72,8 +45,6 @@ public class AnalogWatchFace: UIViewController {
         view.layer.addSublayer(minuteHandLayer)
         view.layer.addSublayer(hourHandLayer)
         view.layer.addSublayer(secondHandLayer)
-        
-        view.layer.addSublayer(CATextLayer())
     }
     
     public override func viewWillAppear(_ animated: Bool) {
@@ -84,10 +55,7 @@ public class AnalogWatchFace: UIViewController {
     public override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        bezelLayer.frame = view.bounds
-        bezelLayer.setNeedsDisplay()
-        
-        numeralsLayer.frame = view.bounds.insetBy(dx: 15, dy: 15)
+        numeralsLayer.frame = view.bounds
         numeralsLayer.setNeedsDisplay()
         
         hourHandLayer.frame = view.bounds
@@ -106,18 +74,6 @@ public class AnalogWatchFace: UIViewController {
         let hours = calendar.component(.hour, from: date) % 12
         let minutes = calendar.component(.minute, from: date)
         let seconds = calendar.component(.second, from: date)
-        
-        AnalogWatchFace.dateFormatter.dateFormat = "E"
-        let day = AnalogWatchFace.dateFormatter.string(from: date)
-        let dayOfMonth = " \(calendar.component(.day, from: date))"
-        
-        let attributed = NSMutableAttributedString(string: day)
-        attributed.addAttributes([NSForegroundColorAttributeName: UIColor.white], range: NSRange(location: 0, length: day.characters.count))
-        
-        let attributedDayOfMonth = NSMutableAttributedString(string: dayOfMonth)
-        attributedDayOfMonth.addAttributes([NSForegroundColorAttributeName: UIColor.orange], range: NSRange(location: 0, length: dayOfMonth.characters.count))
-        attributed.append(attributedDayOfMonth)
-        dateLabel.attributedText = attributed
         
         /// The seconds layer is rotated by 360 degrees for 60 seconds
         /// i.e. one second = 6 degrees rotation
@@ -141,6 +97,9 @@ public class AnalogWatchFace: UIViewController {
         rotate(layer: secondHandLayer, fromValue: secondsProgress.inRadians, withDuration: 60)
         rotate(layer: minuteHandLayer, fromValue: minutesProgress.inRadians, withDuration: 60 * 60)
         rotate(layer: hourHandLayer, fromValue: hourProgress.inRadians, withDuration: 60 * 60 * 12)
+        
+        numeralsLayer.data = hours == 0 ? "12" : "\(hours)"
+        numeralsLayer.dataPosition = NumeralPosition(rawValue: hours)!
         
         delay(Double(60 - seconds), closure: { [weak self] in
             DispatchQueue.main.async {
