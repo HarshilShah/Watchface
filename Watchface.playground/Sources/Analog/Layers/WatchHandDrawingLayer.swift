@@ -66,6 +66,10 @@ public class WatchHandDrawingLayer: CAShapeLayer {
     }
     
     private func getPath() -> UIBezierPath {
+        
+        /// A square, centered `CGRect` is used for the
+        /// bounds in order to leave space for the
+        /// complications
         let bounds: CGRect = {
             if self.bounds.width > self.bounds.height {
                 let diff = self.bounds.width - self.bounds.height
