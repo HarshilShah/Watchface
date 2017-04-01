@@ -47,10 +47,17 @@ public class BezelDrawingLayer: CAShapeLayer {
     
     public override init() {
         super.init()
+        setup()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        lineCap = kCALineCapRound
+        lineJoin = kCALineJoinRound
     }
     
     // MARK:- Drawing
