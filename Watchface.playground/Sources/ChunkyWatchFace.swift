@@ -69,10 +69,9 @@ public class ChunkyWatchFace: UIViewController {
         hourLabel.set(text: "\((calendar.component(.hour, from: date) - 1) % 12 + 1)", withLineHeight: fontSize + 20)
         minuteLabel.set(text: String(format: "%02d", calendar.component(.minute, from: date)), withLineHeight: fontSize + 20)
         
-        let seconds = 60 - calendar.component(.second, from: date)
-        print(seconds)
+        let seconds = calendar.component(.second, from: date)
         
-        delay(Double(seconds), closure: { [weak self] in
+        delay(Double(60 - seconds), closure: { [weak self] in
             DispatchQueue.main.async {
                 self?.set()
             }
