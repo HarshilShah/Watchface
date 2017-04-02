@@ -6,8 +6,9 @@ import PlaygroundSupport
 class WatchfaceGallery: UIPageViewController, UIPageViewControllerDataSource {
     
     private let watchfaces = [
-        ChunkyWatchFace(), AnalogWatchFace(), NumeralsWatchFace(),
-        SevenSegmentWatchFace(), CalculatorWatchFace()
+        AnalogWatchFace(), NumeralsWatchFace(),
+        ChunkyWatchFace(), BouncingBallsWatchFace(),
+        SevenSegmentWatchFace(), CalculatorWatchFace(),
     ]
     
     override func viewDidLoad() {
