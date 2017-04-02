@@ -34,6 +34,10 @@ internal class CircularGradientLayer: CALayer {
         super.init()
     }
     
+    internal override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
     internal required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         needsDisplayOnBoundsChange = true

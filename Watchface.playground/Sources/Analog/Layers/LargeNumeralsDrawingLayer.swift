@@ -45,6 +45,10 @@ public class LargeNumeralsDrawingLayer: CAShapeLayer {
         super.init()
     }
     
+    public override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }

@@ -50,6 +50,10 @@ public class BezelDrawingLayer: CAShapeLayer {
         setup()
     }
     
+    public override init(layer: Any) {
+        super.init(layer: layer)
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
