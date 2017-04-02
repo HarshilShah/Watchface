@@ -270,10 +270,11 @@ public class CalculatorWatchFace: UIViewController {
             return
         }
         
-        if !calculatorModel.isClear() {
+        if !calculatorModel.isClear() || isTypingNumber {
             calculatorModel.clear()
             currentValue = 0
             updateDisplay()
+            isTypingNumber = false
         } else {
             exitCalculatorMode()
         }
