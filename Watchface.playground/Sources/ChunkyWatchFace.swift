@@ -57,7 +57,7 @@ public class ChunkyWatchFace: UIViewController {
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: [. repeat, .autoreverse, .curveEaseInOut], animations: { [weak self] in
+        UIView.animate(withDuration: 0.5, delay: 0, options: [. repeat, .autoreverse, .curveEaseOut], animations: { [weak self] in
             self?.colonLabel.alpha = 0.5
         }, completion: nil)
         
