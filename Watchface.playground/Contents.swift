@@ -17,6 +17,8 @@ class WatchfaceGallery: UIPageViewController, UIPageViewControllerDataSource {
         dataSource = self
         
         setViewControllers([watchfaces.first!], direction: .forward, animated: false, completion: nil)
+        
+        print("Swipe left or right to see more watchfaces!")
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
