@@ -3,46 +3,33 @@
 import UIKit
 import PlaygroundSupport
 
-class WatchfaceGallery: UIPageViewController, UIPageViewControllerDataSource {
-    
-    private let watchfaces = [
-        AnalogWatchFace(), NumeralsWatchFace(),
-        ChunkyWatchFace(), BouncingBallsWatchFace(),
-        SevenSegmentWatchFace(), CalculatorWatchFace(),
-    ]
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        dataSource = self
-        
-        setViewControllers([watchfaces.first!], direction: .forward, animated: false, completion: nil)
-        
-        print("Swipe left or right to see more watchfaces!")
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if var index = watchfaces.index(of: viewController) {
-            index += watchfaces.count - 1
-            index %= watchfaces.count
-            return watchfaces[index]
-        }
-        return nil
-    }
-    
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if var index = watchfaces.index(of: viewController) {
-            index += 1
-            index %= watchfaces.count
-            return watchfaces[index]
-        }
-        
-        return nil
-    }
+struct Constants {
+    static let watchfaceSize = CGSize(width: 312, height: 390)
+    static let watchfaceInsets = CGPoint(x: 75, y: 75)
+    static let watchCornerRadius = CGFloat(90)
 }
 
+let backboard = UIView()
+backboard.backgroundColor = .white
+backboard.frame = CGRect(
+    x: 0,
+    y: 0,
+    width: Constants.watchfaceSize.width + 4 * Constants.watchfaceInsets.x,
+    height: Constants.watchfaceSize.height + 4 * Constants.watchfaceInsets.y)
+
+let watchBody = UIView()
+watchBody.backgroundColor = .black
+watchBody.layer.cornerRadius = Constants.watchCornerRadius
+backboard.addSubview(watchBody)
+watchBody.frame = CGRect(
+    x: Constants.watchfaceInsets.x,
+    y: Constants.watchfaceInsets.y,
+    width: Constants.watchfaceSize.width + 2 * Constants.watchfaceInsets.x,
+    height: Constants.watchfaceSize.height + 2 * Constants.watchfaceInsets.y)
+
 let gallery = WatchfaceGallery(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [:])
+watchBody.addSubview(gallery.view)
+gallery.view.frame = CGRect(origin: Constants.watchfaceInsets,
+                            size: Constants.watchfaceSize)
 
-gallery.view.frame = CGRect(x: 0, y: 0, width: 312, height: 390)
-
-PlaygroundPage.current.liveView = gallery.view
+PlaygroundPage.current.liveView = backboard
