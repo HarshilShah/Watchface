@@ -3,6 +3,18 @@
 import UIKit
 import PlaygroundSupport
 
+/*:
+ # Watchface
+ 
+ This Playground was created as my submission for a scholarship to attend WWDC
+ 2017.
+ 
+ It is a collection of various watchfaces, some replicated and some original,
+ for the Apple Watch.
+ 
+ You can swipe left or right across the watchface on the right to see them all.
+ */
+
 struct Constants {
     static let watchfaceSize = CGSize(width: 312, height: 390)
     static let watchfaceInsets = CGPoint(x: 75, y: 75)
