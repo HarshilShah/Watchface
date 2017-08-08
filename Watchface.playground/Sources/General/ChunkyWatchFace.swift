@@ -4,7 +4,8 @@ public class ChunkyWatchFace: UIViewController {
     
     // MARK:- Constants
     
-    private let font = UIFont.systemFont(ofSize: 230, weight: UIFontWeightLight)
+    private let font = UIFont.centeredColonSystemFont(ofSize: 230)
+    
     private let color = UIColor(red: 0.47, green: 0.76, blue: 0.98, alpha: 1)
     
     // MARK:- Views
@@ -44,13 +45,8 @@ public class ChunkyWatchFace: UIViewController {
         secondaryStackView.addArrangedSubview(minuteLabel)
         
         let fontSize = font.pointSize
-        
-        let attributedColon = NSMutableAttributedString(string: ":")
-        attributedColon.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(value: -Double(fontSize)/3.33), range: NSMakeRange(0, attributedColon.length))
-        
         hourLabel.set(text: "10", withLineHeight: fontSize + 20)
         colonLabel.set(text: ":", withLineHeight: fontSize + 20)
-        colonLabel.set(attributedText: attributedColon, withLineHeight: fontSize + 20)
         minuteLabel.set(text: "09", withLineHeight: fontSize + 20)
     }
     
@@ -86,19 +82,4 @@ public class ChunkyWatchFace: UIViewController {
         })
     }
     
-}
-
-private extension UILabel {
-    func set(text: String, withLineHeight lineHeight: CGFloat) {
-        let attributedString = NSMutableAttributedString(string: text)
-        set(attributedText: attributedString, withLineHeight: lineHeight)
-    }
-    
-    func set(attributedText: NSMutableAttributedString, withLineHeight lineHeight: CGFloat) {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineHeight
-        let attributedString = attributedText
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attributedText.length))
-        self.attributedText = attributedString
-    }
 }

@@ -5,7 +5,7 @@ public class BouncingBallsWatchFace: UIViewController {
     
     // MARK:- Constants
     
-    private let font = UIFont.systemFont(ofSize: 72, weight: UIFontWeightLight)
+    private let font = UIFont.centeredColonSystemFont(ofSize: 72, weight: UIFontWeightLight)
     private let color = UIColor.white
     
     // MARK:- Views
@@ -55,13 +55,8 @@ public class BouncingBallsWatchFace: UIViewController {
         }
         
         let fontSize = font.pointSize
-        
-        let attributedColon = NSMutableAttributedString(string: ":")
-        attributedColon.addAttribute(NSBaselineOffsetAttributeName, value: NSNumber(value: -Double(fontSize)/3), range: NSMakeRange(0, attributedColon.length))
-        
         hourLabel.set(text: "10", withLineHeight: fontSize + 20)
         colonLabel.set(text: ":", withLineHeight: fontSize + 20)
-        colonLabel.set(attributedText: attributedColon, withLineHeight: fontSize + 20)
         minuteLabel.set(text: "09", withLineHeight: fontSize + 20)
     }
     
@@ -102,19 +97,4 @@ public class BouncingBallsWatchFace: UIViewController {
         })
     }
     
-}
-
-private extension UILabel {
-    func set(text: String, withLineHeight lineHeight: CGFloat) {
-        let attributedString = NSMutableAttributedString(string: text)
-        set(attributedText: attributedString, withLineHeight: lineHeight)
-    }
-    
-    func set(attributedText: NSMutableAttributedString, withLineHeight lineHeight: CGFloat) {
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = lineHeight
-        let attributedString = attributedText
-        attributedString.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attributedText.length))
-        self.attributedText = attributedString
-    }
 }
