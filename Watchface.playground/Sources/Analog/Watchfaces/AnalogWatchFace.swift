@@ -16,7 +16,7 @@ public class AnalogWatchFace: UIViewController {
     
     private lazy var numeralsLayer: NumeralsDrawingLayer = {
         let numeralsLayer = NumeralsDrawingLayer()
-        numeralsLayer.font = UIFont.systemFont(ofSize: 24, weight: UIFontWeightLight)
+        numeralsLayer.font = UIFont.systemFont(ofSize: 24, weight: .light)
         return numeralsLayer
     }()
     
@@ -110,10 +110,14 @@ public class AnalogWatchFace: UIViewController {
         let dayOfMonth = " \(calendar.component(.day, from: date))"
         
         let attributed = NSMutableAttributedString(string: day)
-        attributed.addAttributes([NSForegroundColorAttributeName: UIColor.white], range: NSRange(location: 0, length: day.characters.count))
+        attributed.addAttributes(
+            [.foregroundColor: UIColor.white],
+            range: NSRange(location: 0, length: day.count))
         
         let attributedDayOfMonth = NSMutableAttributedString(string: dayOfMonth)
-        attributedDayOfMonth.addAttributes([NSForegroundColorAttributeName: UIColor.orange], range: NSRange(location: 0, length: dayOfMonth.characters.count))
+        attributedDayOfMonth.addAttributes(
+            [.foregroundColor: UIColor.orange],
+            range: NSRange(location: 0, length: dayOfMonth.count))
         attributed.append(attributedDayOfMonth)
         dateLabel.attributedText = attributed
         

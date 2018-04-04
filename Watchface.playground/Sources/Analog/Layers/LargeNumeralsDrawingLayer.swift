@@ -18,14 +18,15 @@ public class LargeNumeralsDrawingLayer: CAShapeLayer {
             setNeedsDisplay()
         }
     }
-        public var dataPosition = NumeralPosition(rawValue: 0)! {
+    
+    public var dataPosition = NumeralPosition(rawValue: 0)! {
         didSet {
             setNeedsDisplay()
         }
     }
     
     /// The font in which the numerals will be set
-    public var font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightLight) {
+    public var font = UIFont.systemFont(ofSize: 20, weight: .light) {
         didSet {
             setNeedsDisplay()
         }
@@ -103,9 +104,9 @@ public class LargeNumeralsDrawingLayer: CAShapeLayer {
             x: point.x - center.x,
             y: point.y - center.y)
         
-        let attr: [String: Any] = [
-            NSFontAttributeName: font,
-            NSForegroundColorAttributeName: color]
+        let attr: [NSAttributedStringKey: Any] = [
+            .font: font,
+            .foregroundColor: color]
         
         let attributedString = NSAttributedString(string: data, attributes: attr)
         let line = CTLineCreateWithAttributedString(attributedString)

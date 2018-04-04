@@ -2,15 +2,13 @@ import UIKit
 
 public class CalculatorWatchFace: UIViewController {
     
-    // MARK:- Private variables
-    
-    // MARK: Constants
+    // MARK:- Constants
     
     private let spacing: CGFloat = 5
     private let onColor = UIColor.black
     private let offColor = UIColor.black.withAlphaComponent(0.05)
     
-    // MARK: Views
+    // MARK:- Views
     
     private lazy var timeDisplayView: UIStackView = {
         let stackView = UIStackView()
@@ -164,8 +162,8 @@ public class CalculatorWatchFace: UIViewController {
         }
         
         let aspectRatio = timeDisplayView.arrangedSubviews.reduce(CGFloat(0)) {
-            let size = $0.1.intrinsicContentSize
-            return $0.0 + size.width / size.height
+            let size = $1.intrinsicContentSize
+            return $0 + size.width / size.height
         }
         
         timeDisplayHeightConstraint = timeDisplayView.heightAnchor.constraint(equalTo: timeDisplayView.widthAnchor, multiplier: 1 / aspectRatio)

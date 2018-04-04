@@ -47,8 +47,8 @@ public class SevenSegmentWatchFace: UIViewController {
         }
         
         let aspectRatio = stackView.arrangedSubviews.reduce(CGFloat(0)) {
-            let size = $0.1.intrinsicContentSize
-            return $0.0 + size.width / size.height
+            let size = $1.intrinsicContentSize
+            return $0 + size.width / size.height
         }
         
         heightConstraint = stackView.heightAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 1 / aspectRatio)

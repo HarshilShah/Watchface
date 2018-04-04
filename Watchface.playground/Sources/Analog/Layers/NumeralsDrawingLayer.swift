@@ -24,7 +24,7 @@ public class NumeralsDrawingLayer: CAShapeLayer {
     }
     
     /// The font in which the numerals will be set
-    public var font = UIFont.systemFont(ofSize: 20, weight: UIFontWeightLight) {
+    public var font = UIFont.systemFont(ofSize: 20, weight: .light) {
         didSet {
             setNeedsDisplay()
         }
@@ -78,9 +78,9 @@ public class NumeralsDrawingLayer: CAShapeLayer {
         
         for (text, point) in zip(data, points) {
             let attr = [
-                NSFontAttributeName: font,
-                NSForegroundColorAttributeName: color] as CFDictionary
-            let attrStr = CFAttributedStringCreate(nil, text as CFString!, attr)
+                NSAttributedStringKey.font: font,
+                NSAttributedStringKey.foregroundColor: color] as CFDictionary
+            let attrStr = CFAttributedStringCreate(nil, text as CFString, attr)
             
             let line = CTLineCreateWithAttributedString(attrStr!)
             let bounds = CTLineGetBoundsWithOptions(line, CTLineBoundsOptions.useOpticalBounds)

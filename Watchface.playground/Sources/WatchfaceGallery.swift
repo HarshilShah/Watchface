@@ -6,7 +6,7 @@ public class WatchfaceGallery: UIPageViewController, UIPageViewControllerDataSou
         AnalogWatchFace(), NumeralsWatchFace(),
         ChunkyWatchFace(), BouncingBallsWatchFace(),
         SevenSegmentWatchFace(), CalculatorWatchFace(),
-        ]
+    ]
     
     public override func viewDidLoad() {
         super.viewDidLoad()

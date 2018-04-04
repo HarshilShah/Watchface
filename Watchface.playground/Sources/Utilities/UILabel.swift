@@ -5,7 +5,9 @@ extension UILabel {
         let attributedText = NSMutableAttributedString(string: text)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = lineHeight
-        attributedText.addAttribute(NSParagraphStyleAttributeName, value:paragraphStyle, range:NSMakeRange(0, attributedText.length))
+        attributedText.addAttribute(.paragraphStyle,
+                                    value: paragraphStyle,
+                                    range: NSMakeRange(0, attributedText.length))
         self.attributedText = attributedText
     }
 }

@@ -2,34 +2,36 @@ import UIKit
 
 extension UIFont {
     
-    class func smallCapsSystemFont(ofSize size: CGFloat, weight: CGFloat = UIFontWeightRegular) -> UIFont {
+    class func smallCapsSystemFont(ofSize size: CGFloat, weight: UIFont.Weight = .regular) -> UIFont {
         let descriptor = UIFont.systemFont(ofSize: size, weight: weight).fontDescriptor
         
-        let smallLettersToSmallCapsAttribute = [
-            UIFontFeatureTypeIdentifierKey: kLowerCaseType,
-            UIFontFeatureSelectorIdentifierKey: kLowerCaseSmallCapsSelector ]
+        let smallLettersToSmallCapsAttribute: [UIFontDescriptor.FeatureKey: Any] = [
+            .featureIdentifier: kLowerCaseType,
+            .typeIdentifier: kLowerCaseSmallCapsSelector ]
         
-        let capitalLettersToSmallCapsAttribute = [
-            UIFontFeatureTypeIdentifierKey: kUpperCaseType,
-            UIFontFeatureSelectorIdentifierKey: kUpperCaseSmallCapsSelector ]
+        let capitalLettersToSmallCapsAttribute: [UIFontDescriptor.FeatureKey: Any] = [
+            .featureIdentifier: kUpperCaseType,
+            .typeIdentifier: kUpperCaseSmallCapsSelector ]
         
-        let newDescriptor = descriptor
-            .addingAttributes( [UIFontDescriptorFeatureSettingsAttribute : [smallLettersToSmallCapsAttribute]] )
-            .addingAttributes( [UIFontDescriptorFeatureSettingsAttribute : [capitalLettersToSmallCapsAttribute]] )
+        let newDescriptor = descriptor.addingAttributes([
+            .featureSettings: [smallLettersToSmallCapsAttribute,
+                               capitalLettersToSmallCapsAttribute]
+        ])
         
         return UIFont(descriptor: newDescriptor, size: size)
         
     }
     
-    class func centeredColonSystemFont(ofSize size: CGFloat, weight: CGFloat = UIFontWeightRegular) -> UIFont {
+    class func centeredColonSystemFont(ofSize size: CGFloat, weight: UIFont.Weight = .regular) -> UIFont {
         let descriptor = UIFont.systemFont(ofSize: size, weight: weight).fontDescriptor
         
-        let centeredColonAttribute = [
-            UIFontFeatureTypeIdentifierKey: kStylisticAlternativesType,
-            UIFontFeatureSelectorIdentifierKey: kStylisticAltThreeOnSelector ]
+        let centeredColonAttribute: [UIFontDescriptor.FeatureKey: Any] = [
+            .featureIdentifier: kStylisticAlternativesType,
+            .typeIdentifier: kStylisticAltThreeOnSelector ]
         
-        let newDescriptor = descriptor
-            .addingAttributes( [UIFontDescriptorFeatureSettingsAttribute : [centeredColonAttribute]] )
+        let newDescriptor = descriptor.addingAttributes( [
+            .featureSettings: [centeredColonAttribute]
+        ])
         
         return UIFont(descriptor: newDescriptor, size: size)
     }

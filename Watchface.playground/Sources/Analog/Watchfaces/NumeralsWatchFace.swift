@@ -4,7 +4,7 @@ public class NumeralsWatchFace: UIViewController {
     
     private lazy var numeralsLayer: LargeNumeralsDrawingLayer = {
         let numeralsLayer = LargeNumeralsDrawingLayer()
-        numeralsLayer.font = UIFont.systemFont(ofSize: 160, weight: UIFontWeightSemibold)
+        numeralsLayer.font = UIFont.systemFont(ofSize: 160, weight: .semibold)
         numeralsLayer.color = UIColor.orange
         return numeralsLayer
     }()

@@ -5,7 +5,7 @@ public class BouncingBallsWatchFace: UIViewController {
     
     // MARK:- Constants
     
-    private let font = UIFont.centeredColonSystemFont(ofSize: 72, weight: UIFontWeightLight)
+    private let font = UIFont.centeredColonSystemFont(ofSize: 72, weight: .light)
     private let color = UIColor.white
     
     // MARK:- Views

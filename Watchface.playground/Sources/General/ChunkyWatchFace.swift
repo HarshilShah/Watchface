@@ -4,7 +4,7 @@ public class ChunkyWatchFace: UIViewController {
     
     // MARK:- Constants
     
-    private let font = UIFont.centeredColonSystemFont(ofSize: 230)
+    private let font = UIFont.centeredColonSystemFont(ofSize: 220)
     
     private let color = UIColor(red: 0.47, green: 0.76, blue: 0.98, alpha: 1)
     
