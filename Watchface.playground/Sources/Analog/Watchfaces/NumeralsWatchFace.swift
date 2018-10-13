@@ -121,7 +121,7 @@ public class NumeralsWatchFace: UIViewController {
         
         let rotationAnimation = CABasicAnimation(keyPath:"transform.rotation.z")
         rotationAnimation.duration = duration
-        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        rotationAnimation.timingFunction = CAMediaTimingFunction(name: .linear)
         rotationAnimation.repeatCount = HUGE
         rotationAnimation.fromValue = fromValue
         rotationAnimation.toValue = fromValue + Degrees(360).inRadians

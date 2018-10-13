@@ -55,8 +55,8 @@ public class WatchHandDrawingLayer: CAShapeLayer {
     private func setup() {
         fillColor = nil
         
-        lineCap = kCALineCapRound
-        lineJoin = kCALineJoinRound
+        lineCap = .round
+        lineJoin = .round
         
         shadowColor = UIColor.black.cgColor
         shadowOffset = CGSize(width: 0, height: 1)

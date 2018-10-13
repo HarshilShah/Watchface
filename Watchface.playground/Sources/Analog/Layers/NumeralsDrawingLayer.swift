@@ -78,8 +78,8 @@ public class NumeralsDrawingLayer: CAShapeLayer {
         
         for (text, point) in zip(data, points) {
             let attr = [
-                NSAttributedStringKey.font: font,
-                NSAttributedStringKey.foregroundColor: color] as CFDictionary
+                NSAttributedString.Key.font: font,
+                NSAttributedString.Key.foregroundColor: color] as CFDictionary
             let attrStr = CFAttributedStringCreate(nil, text as CFString, attr)
             
             let line = CTLineCreateWithAttributedString(attrStr!)

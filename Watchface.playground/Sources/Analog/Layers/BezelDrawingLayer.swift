@@ -60,8 +60,8 @@ public class BezelDrawingLayer: CAShapeLayer {
     }
     
     private func setup() {
-        lineCap = kCALineCapRound
-        lineJoin = kCALineJoinRound
+        lineCap = .round
+        lineJoin = .round
     }
     
     // MARK:- Drawing

@@ -104,7 +104,7 @@ public class LargeNumeralsDrawingLayer: CAShapeLayer {
             x: point.x - center.x,
             y: point.y - center.y)
         
-        let attr: [NSAttributedStringKey: Any] = [
+        let attr: [NSAttributedString.Key: Any] = [
             .font: font,
             .foregroundColor: color]
         
